@@ -283,7 +283,7 @@ void win_textbuffer_rearrange(window_t *win, rect_t *box)
     if (newwid != dwin->width)
     {
         dwin->width = newwid;
-        reflow(win);
+        /* reflow(win); */
     }
 
     if (newhgt != dwin->height)
