@@ -138,7 +138,7 @@ switch $(OS)
     case MACOSX :
         Echo "OS is MACOSX (cocoa)" ;
         SUFDLL = .dylib ;
-        MAINARCH = -arch i386 ;
+        MAINARCH = -arch x86_64 ;
         CCFLAGS = -Wno-pointer-sign $(MAINARCH) $(ALTARCH) ;
         PKGCONFIG = "pkg-config freetype2" ;
         GARGLKCCFLAGS = "`$(PKGCONFIG) --cflags`" ;

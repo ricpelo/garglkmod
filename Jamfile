@@ -7,7 +7,7 @@ SubDir TOP ;
 
 SubInclude TOP garglk ;
 SubInclude TOP terps ;
-SubInclude TOP tads ;
+#SubInclude TOP tads ;
 SubInclude TOP support ;
 
 # If SYSTEM is set, use values for a system wide install

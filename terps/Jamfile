@@ -6,22 +6,22 @@
 
 SubDir TOP terps ;
 
-MAKE_ADVSYS     ?= yes ;
-MAKE_AGILITY    ?= yes ;
-MAKE_ALAN2      ?= yes ;
-MAKE_ALAN3      ?= yes ;
-MAKE_BOCFEL     ?= yes ;
-MAKE_FROTZ      ?= yes ;
-MAKE_GEAS       ?= yes ;
+MAKE_ADVSYS     ?= no ;
+MAKE_AGILITY    ?= no ;
+MAKE_ALAN2      ?= no ;
+MAKE_ALAN3      ?= no ;
+MAKE_BOCFEL     ?= no ;
+MAKE_FROTZ      ?= no ;
+MAKE_GEAS       ?= no ;
 MAKE_GIT        ?= yes ;
 MAKE_GLULXE     ?= yes ;
-MAKE_HUGO       ?= yes ;
-MAKE_JACL       ?= yes ;
-MAKE_LEVEL9     ?= yes ;
-MAKE_MAGNETIC   ?= yes ;
-MAKE_NITFOL     ?= yes ;
-MAKE_SCARE      ?= yes ;
-MAKE_SCOTT      ?= yes ;
+MAKE_HUGO       ?= no ;
+MAKE_JACL       ?= no ;
+MAKE_LEVEL9     ?= no ;
+MAKE_MAGNETIC   ?= no ;
+MAKE_NITFOL     ?= no ;
+MAKE_SCARE      ?= no ;
+MAKE_SCOTT      ?= no ;
 
 # -----------------------------------------------------------------------
 #
