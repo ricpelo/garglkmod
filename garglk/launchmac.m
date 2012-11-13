@@ -485,7 +485,21 @@ char *winfilters[] =
     if (!(processID > 0))
         return NO;
 
-    unsigned int style = NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask;
+    unsigned int style = NSTitledWindowMask | NSClosableWindowMask;
+
+    NSRect screenRect;
+    NSArray *screenArray = [NSScreen screens];
+    unsigned screenCount = [screenArray count];
+    unsigned index  = 0;
+
+    for (index; index < screenCount; index++)
+    {
+        NSScreen *screen = [screenArray objectAtIndex: index];
+        screenRect = [screen visibleFrame];
+    }
+
+    width = screenRect.size.width;
+    height = screenRect.size.height;
 
     /* set up the window */
     GargoyleWindow * window = [[GargoyleWindow alloc] initWithContentRect: NSMakeRect(0,0, width, height)
