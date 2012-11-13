@@ -522,6 +522,7 @@ void winopen(void)
     defh = gli_wmarginy * 2 + gli_cellh * gli_rows;
 
     frame = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
     GTK_WIDGET_SET_FLAGS(frame, GTK_CAN_FOCUS);
     gtk_widget_set_events(frame, GDK_BUTTON_PRESS_MASK
                                | GDK_BUTTON_RELEASE_MASK
@@ -561,6 +562,9 @@ void winopen(void)
         GDK_HINT_MIN_SIZE | GDK_HINT_MAX_SIZE
         );
     gtk_window_set_default_size(GTK_WINDOW(frame), defw, defh);
+    gtk_window_set_resizable(GTK_WINDOW(frame), FALSE);
+    gtk_window_set_decorated(GTK_WINDOW(frame), FALSE);
+    gtk_window_fullscreen(GTK_WINDOW(frame));
 
     gtk_widget_show(canvas);
     gtk_widget_show(frame);
