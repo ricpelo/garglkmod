@@ -119,15 +119,20 @@ void gli_initialize_misc()
 
 void glk_exit()
 {
+    winexit();
+
+/*
     event_t event;
 
     garglk_set_story_title("[ press any key to exit ]");
 
     gli_terminated = 1;
-
+*/
     /* wait for gli_handle_input_key to exit() */
+/*
     while (1)
         glk_select(&event);
+*/
 }
 
 void glk_set_interrupt_handler(void (*func)(void))
