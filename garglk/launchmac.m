@@ -485,6 +485,9 @@ char *winfilters[] =
     if (!(processID > 0))
         return NO;
 
+    NSApplicationPresentationOptions options = NSApplicationPresentationHideDock + NSApplicationPresentationHideMenuBar;
+    [NSApp setPresentationOptions: options];
+
     unsigned int style = NSTitledWindowMask | NSClosableWindowMask;
 
     NSRect screenRect;
