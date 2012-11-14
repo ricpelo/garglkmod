@@ -327,11 +327,15 @@ void winopen()
     sizeh += GetSystemMetrics(SM_CYFRAME) * 2;
     sizeh += GetSystemMetrics(SM_CYCAPTION);
 
-    hwndframe = CreateWindow("XxFrame",
+    sizew = GetSystemMetrics(SM_CXSCREEN);
+    sizeh = GetSystemMetrics(SM_CYSCREEN);
+
+    hwndframe = CreateWindowEx(WS_EX_TOPMOST, "XxFrame",
         NULL, // window caption
-        WS_CAPTION|WS_THICKFRAME|
-        WS_SYSMENU|WS_MAXIMIZEBOX|WS_MINIMIZEBOX|
-        WS_CLIPCHILDREN,
+        WS_CLIPCHILDREN|WS_MAXIMIZE,
+//        WS_CAPTION|WS_THICKFRAME|
+//        WS_SYSMENU|WS_MAXIMIZEBOX|WS_MINIMIZEBOX|
+//        WS_CLIPCHILDREN,
         CW_USEDEFAULT, // initial x position
         CW_USEDEFAULT, // initial y position
         sizew, // initial x size
@@ -351,11 +355,11 @@ void winopen()
 
     hdc = NULL;
 
-    menu = GetSystemMenu(hwndframe, 0);
-    AppendMenu(menu, MF_SEPARATOR, 0, NULL);
-    AppendMenu(menu, MF_STRING, ID_ABOUT, "About Gargoyle...");
-    AppendMenu(menu, MF_STRING, ID_CONFIG, "Options...");
-    // AppendMenu(menu, MF_STRING, ID_TOGSCR, "Toggle scrollbar");
+    //menu = GetSystemMenu(hwndframe, 0);
+    //AppendMenu(menu, MF_SEPARATOR, 0, NULL);
+    //AppendMenu(menu, MF_STRING, ID_ABOUT, "About Gargoyle...");
+    //AppendMenu(menu, MF_STRING, ID_CONFIG, "Options...");
+    //AppendMenu(menu, MF_STRING, ID_TOGSCR, "Toggle scrollbar");
 
     wintitle();
 
@@ -364,6 +368,8 @@ void winopen()
 
 void wintitle(void)
 {
+    return;
+/*
     char buf[256];
 
     if (strlen(gli_story_title))
@@ -382,6 +388,7 @@ void wintitle(void)
 
     ModifyMenu(GetSystemMenu(hwndframe, 0), ID_ABOUT, MF_BYCOMMAND | MF_STRING, ID_ABOUT, buf);
     DrawMenuBar(hwndframe);
+*/
 }
 
 static void winblit(RECT r)
