@@ -153,9 +153,15 @@ char *winfilters[] =
                    fileFilter: (unsigned int) filter;
 - (pid_t) retrieveID;
 - (void) quit;
+- (BOOL) canBecomeKeyWindow;
 @end
 
 @implementation GargoyleWindow
+
+- (BOOL) canBecomeKeyWindow
+{
+    return YES;
+}
 
 - (id) initWithContentRect: (NSRect) contentRect
                  styleMask: (unsigned int) windowStyle
@@ -488,7 +494,7 @@ char *winfilters[] =
     NSApplicationPresentationOptions options = NSApplicationPresentationHideDock + NSApplicationPresentationHideMenuBar;
     [NSApp setPresentationOptions: options];
 
-    unsigned int style = NSTitledWindowMask | NSClosableWindowMask;
+    unsigned int style = 0; /* NSTitledWindowMask | NSClosableWindowMask; */
 
     NSRect screenRect;
     NSArray *screenArray = [NSScreen screens];
