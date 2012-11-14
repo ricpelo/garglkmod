@@ -1,7 +1,7 @@
 @echo off
 echo Building Gargoyle for Windows ...
 pushd %0\..
-jam -sOS=MINGW -sCC=gcc -sCXX=g++ -j%NUMBER_OF_PROCESSORS%
+jam -sOS=MINGW -sCC=gcc -sCXX=g++ -j%NUMBER_OF_PROCESSORS% install
 echo ... finished building!
 pause
 exit /b
