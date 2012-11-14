@@ -641,6 +641,7 @@ char *winfilters[] =
         [window performClose:self];
     }
 
+    [NSApp terminate: nil];
 }
 
 - (NSString *) openWindowDialog: (pid_t) processID
