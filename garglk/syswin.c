@@ -364,6 +364,8 @@ void winopen()
     wintitle();
 
     ShowWindow(hwndframe, SW_SHOW);
+    SetWindowLong(hwndframe, GWL_STYLE, GetWindowLong(hwndframe, GWL_STYLE) & ~(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME));
+    SetWindowLong(hwndframe, GWL_EXSTYLE, GetWindowLong(hwndframe, GWL_EXSTYLE) & ~WS_EX_DLGMODALFRAME);
 }
 
 void wintitle(void)
