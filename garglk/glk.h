@@ -261,6 +261,8 @@ extern strid_t glk_stream_get_current(void);
 
 extern void glk_put_char(unsigned char ch);
 extern void glk_put_char_stream(strid_t str, unsigned char ch);
+extern void glk_incr_fontsize(void);
+extern void glk_decr_fontsize(void);
 extern void glk_put_string(char *s);
 extern void glk_put_string_stream(strid_t str, char *s);
 extern void glk_put_buffer(char *buf, glui32 len);

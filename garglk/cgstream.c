@@ -1880,6 +1880,24 @@ void glk_put_char_stream_uni(stream_t *str, glui32 ch)
     gli_put_char_uni(str, ch);
 }
 
+void glk_incr_fontsize(void)
+{
+    gli_conf_monosize++;
+    gli_conf_propsize++;
+    gli_leading++;
+    gli_baseline++;
+    gli_initialize_fonts();
+}
+
+void glk_decr_fontsize(void)
+{
+    gli_conf_monosize--;
+    gli_conf_propsize--;
+    gli_leading--;
+    gli_baseline--;
+    gli_initialize_fonts();
+}
+
 void glk_put_string(char *s)
 {
     gli_put_buffer(gli_currentstr, s, strlen(s));

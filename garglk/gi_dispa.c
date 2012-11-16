@@ -316,6 +316,8 @@ static gidispatch_function_t function_table[] = {
     { 0x016E, glk_date_to_simple_time_utc, "date_to_simple_time_utc" },
     { 0x016F, glk_date_to_simple_time_local, "date_to_simple_time_local" },
 #endif /* GLK_MODULE_DATETIME */
+    { 0xFFFE, glk_incr_fontsize, "incr_fontsize" },
+    { 0xFFFD, glk_decr_fontsize, "decr_fontsize" },
 };
 
 glui32 gidispatch_count_classes()
@@ -653,6 +655,10 @@ char *gidispatch_prototype(glui32 funcnum)
         case 0x016F: /* date_to_simple_time_local */
             return "3>+[8IsIsIsIsIsIsIsIs]Iu:Is";
 #endif /* GLK_MODULE_DATETIME */
+        case 0xFFFE:
+            return "0:";
+        case 0xFFFD:
+            return "0:";
 
         default:
             return NULL;
@@ -1471,6 +1477,14 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
             }
             break;
 #endif /* GLK_MODULE_DATETIME */
+
+        case 0xFFFE:
+            glk_incr_fontsize();
+            break;
+
+        case 0xFFFD:
+            glk_decr_fontsize();
+            break;
 
         default:
             /* do nothing */
