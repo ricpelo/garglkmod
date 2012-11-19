@@ -789,6 +789,9 @@ int gli_draw_string_uni(int x, int y, int fidx, unsigned char *rgb,
           n--;
         }
 
+        if (c >= 0xFFFFFF00)
+          c = c & 0x000000FF;
+
         getglyph(f, c, &adv, &glyphs);
 
         if (prev != -1)

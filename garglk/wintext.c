@@ -1296,8 +1296,8 @@ void win_textbuffer_cancel_line(window_t *win, event_t *ev)
         for (ix=0; ix<len; ix++)
         {
             glui32 ch = dwin->chars[dwin->infence+ix];
-            if (ch > 0xff)
-                ch = '?';
+/*            if (ch > 0xff)
+                  ch = '?'; */
             ((char *)inbuf)[ix] = (char)ch;
         }
     }
@@ -1519,8 +1519,8 @@ static void acceptline(window_t *win, glui32 keycode)
         for (ix=0; ix<len; ix++)
         {
             glui32 ch = dwin->chars[dwin->infence+ix];
-            if (ch > 0xff)
-                ch = '?';
+/*            if (ch > 0xff)
+                  ch = '?'; */
             ((char *)inbuf)[ix] = (char)ch;
         }
     }
