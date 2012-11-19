@@ -27,6 +27,8 @@
 #include "glk.h"
 #include "garglk.h"
 
+#define countof(x) (sizeof x / sizeof *x)
+
 /* A pointer to the place where the pending glk_select() will store its
    event. When not inside a glk_select() call, this will be NULL. */
 event_t *gli_curevent = NULL;
@@ -168,16 +170,96 @@ void glk_tick()
 /* Handle a keystroke. */
 void gli_input_handle_key(glui32 key)
 {
+    window_t *win = gli_focuswin;
+
     if (gli_more_focus)
     {
         gli_input_more_focus();
     }
-
     else
     {
         switch (key)
         {
             case keycode_Tab:
+                {
+                    window_textbuffer_t *dwin = win->data;
+                    int i, n, z;
+                    char c;
+
+                    //Step backward to find last space on input line
+                    for (i = dwin->numchars; i > 0; i--)
+                    {
+                        //Convert to lowercase
+                        c = dwin->chars[i];
+
+                        if (c >= 'A' && c <= 'Z')
+                            c += 32;
+
+                        if (c == 'Á') c = 'á';
+                        else if (c == 'É') c = 'é';
+                        else if (c == 'Í') c = 'í';
+                        else if (c == 'Ó') c = 'ó';
+                        else if (c == 'Ú') c = 'ú';
+                        else if (c == 'Ñ') c = 'ñ';
+                        else if (c == 'Ç') c = 'ç';
+
+                        if (dwin->chars[i] == 0x20)
+                            break;
+                    }
+ 
+                    //Step forward to extract last word
+                    glui32 word[dwin->numchars - i];
+
+                    for (n = i; n < dwin->numchars; n++)
+                        word[n - i] = dwin->chars[n];
+
+                    //Loop through lines of prv output
+                    for (i = 1; i <= dwin->scrollmax; i++)
+                    {
+                        //Step backwards through char of the line
+                        for (n = dwin->lines[i].len; n > 0; n--)
+                       	{
+                            //Step forward again, break if char doesn't match word
+                       	    for (z = 0; z < countof(word); z++)
+                       	    {
+                                //Convert to lowercase
+                                c = dwin->lines[i].chars[n + z];
+
+                                if (c >= 'A' && c <= 'Z')
+                                    c += 32;
+
+                                if (c == 'Á') c = 'á';
+                                else if (c == 'É') c = 'é';
+                                else if (c == 'Í') c = 'í';
+                                else if (c == 'Ó') c = 'ó';
+                                else if (c == 'Ú') c = 'ú';
+                                else if (c == 'Ñ') c = 'ñ';
+
+                                if (c != (char) word[z])
+                                    break;
+
+                                if (z == countof(word) - 1)
+                                    goto End; //Match found, break all three loops
+                            }
+                       	}
+                    }
+                    End:
+                    
+                    /* Call input event for each char in tab complete
+                     i is the line, n is the first char of match, z is length of match,
+                     so n+z is end of match and start of tab complete */
+                    n++;
+                    while ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') ||
+                            c == 'Á' || c == 'á' || c == 'É' || c == 'é' || c == 'Í' || c == 'í' ||
+                            c == 'Ó' || c == 'ó' || c == 'Ú' || c == 'ú' || c == 'Ñ' || c == 'ñ' ||
+                            c == 'Ç' || c == 'ç')
+                    {
+                        gcmd_buffer_accept_readline(win, dwin->lines[i].chars[n + z]);
+                        n++;
+                        c = (char)dwin->lines[i].chars[n + z];
+                    }
+                    gcmd_buffer_accept_readline(win, ' ');
+                }
                 gli_input_next_focus();
                 return;
             case keycode_PageUp:
@@ -191,9 +273,6 @@ void gli_input_handle_key(glui32 key)
                 break;
         }
     }
-
-    window_t *win = gli_focuswin;
-
     if (!win)
         return;
 
