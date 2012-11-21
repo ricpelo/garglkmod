@@ -264,6 +264,8 @@ extern void glk_put_char(unsigned char ch);
 extern void glk_put_char_stream(strid_t str, unsigned char ch);
 extern void glk_incr_fontsize(void);
 extern void glk_decr_fontsize(void);
+extern void glk_window_stylehint_set(winid_t win, glui32 styl, glui32 hint,
+    glsi32 val);
 extern void glk_put_string(char *s);
 extern void glk_put_string_stream(strid_t str, char *s);
 extern void glk_put_buffer(char *buf, glui32 len);

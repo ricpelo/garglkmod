@@ -134,6 +134,84 @@ void glk_stylehint_set(glui32 wintype, glui32 style, glui32 hint, glsi32 val)
     }
 }
 
+void glk_window_stylehint_set(winid_t win, glui32 style, glui32 hint, glsi32 val)
+{
+    style_t *styles;
+    int p, b, i;
+
+    if (win->type == wintype_TextGrid)
+        styles = ((window_textgrid_t*)win->data)->styles;
+    else if (win->type == wintype_TextBuffer)
+        styles = ((window_textbuffer_t*)win->data)->styles;
+    else
+        return;
+
+    /* No tenemos en cuenta el parámetro de configuración stylehint. Si no lo
+       comentamos, un "stylehint 0" en garglk.ini provocaría que se parase
+       la función en este punto: */
+/*    if (!gli_conf_stylehint)
+        return; */
+
+    switch (hint)
+    {
+        case stylehint_TextColor:
+            styles[style].fg[0] = (val >> 16) & 0xff;
+            styles[style].fg[1] = (val >> 8) & 0xff;
+            styles[style].fg[2] = (val) & 0xff;
+            break;
+
+        case stylehint_BackColor:
+            styles[style].bg[0] = (val >> 16) & 0xff;
+            styles[style].bg[1] = (val >> 8) & 0xff;
+            styles[style].bg[2] = (val) & 0xff;
+            break;
+
+        case stylehint_ReverseColor:
+            styles[style].reverse = (val != 0);
+            break;
+
+        case stylehint_Proportional:
+            if (win->type == wintype_TextBuffer)
+            {
+                p = val > 0;
+                b = isbold(styles[style].font);
+                i = isitalic(styles[style].font);
+                styles[style].font = makefont(p, b, i);
+            }
+            break;
+
+        case stylehint_Weight:
+            p = isprop(styles[style].font);
+            b = val > 0;
+            i = isitalic(styles[style].font);
+            styles[style].font = makefont(p, b, i);
+            break;
+
+        case stylehint_Oblique:
+            p = isprop(styles[style].font);
+            b = isbold(styles[style].font);
+            i = val > 0;
+            styles[style].font = makefont(p, b, i);
+            break;
+    }
+
+    if (win->type == wintype_TextBuffer &&
+            style == style_Normal &&
+            hint == stylehint_BackColor)
+    {
+        memcpy(gli_window_color, styles[style].bg, 3);
+    }
+
+    if (win->type == wintype_TextBuffer &&
+            style == style_Normal &&
+            hint == stylehint_TextColor)
+    {
+        memcpy(gli_more_color, styles[style].fg, 3);
+        memcpy(gli_caret_color, styles[style].fg, 3);
+    }
+
+}
+
 void glk_stylehint_clear(glui32 wintype, glui32 style, glui32 hint)
 {
     style_t *styles;

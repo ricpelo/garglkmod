@@ -318,6 +318,7 @@ static gidispatch_function_t function_table[] = {
 #endif /* GLK_MODULE_DATETIME */
     { 0xFFFE, glk_incr_fontsize, "incr_fontsize" },
     { 0xFFFD, glk_decr_fontsize, "decr_fontsize" },
+    { 0xFFFC, glk_window_stylehint_set, "window_stylehint_set" }
 };
 
 glui32 gidispatch_count_classes()
@@ -655,10 +656,12 @@ char *gidispatch_prototype(glui32 funcnum)
         case 0x016F: /* date_to_simple_time_local */
             return "3>+[8IsIsIsIsIsIsIsIs]Iu:Is";
 #endif /* GLK_MODULE_DATETIME */
-        case 0xFFFE:
+        case 0xFFFE: /* incr_fontsize */
             return "0:";
-        case 0xFFFD:
+        case 0xFFFD: /* decr_fontsize */
             return "0:";
+        case 0xFFFC: /* glk_window_stylehint_set */
+            return "4QaIuIuIs:";
 
         default:
             return NULL;
@@ -1478,12 +1481,17 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
             break;
 #endif /* GLK_MODULE_DATETIME */
 
-        case 0xFFFE:
+        case 0xFFFE: /* incr_fontsize */
             glk_incr_fontsize();
             break;
 
-        case 0xFFFD:
+        case 0xFFFD: /* decr_fontsize */
             glk_decr_fontsize();
+            break;
+
+        case 0xFFFC: /* window_stylehint_set */
+            glk_window_stylehint_set(arglist[0].opaqueref, arglist[1].uint,
+                                     arglist[2].uint, arglist[3].sint);
             break;
 
         default:
