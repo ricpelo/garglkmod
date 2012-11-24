@@ -1324,15 +1324,15 @@ void win_textbuffer_cancel_line(window_t *win, event_t *ev)
     dwin->inbuf = NULL;
     dwin->inmax = 0;
 
-    if (dwin->echo_line_input)
+/*    if (dwin->echo_line_input)
     {
         win_textbuffer_putchar_uni(win, '\n');
     }
     else
-    {
+    { */
         dwin->numchars = dwin->infence;
         touch(dwin, 0);
-    }
+/*    } */
 
     if (gli_unregister_arr)
         (*gli_unregister_arr)(inbuf, inmax, unicode ? "&+#!Iu" : "&+#!Cn", inarrayrock);
