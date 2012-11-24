@@ -610,3 +610,18 @@ void gli_startup(int argc, char *argv[])
     winopen();
     gli_initialize_babel();
 }
+
+void glk_set_config(glui32 param, glui32 value)
+{
+    gli_link_color[0] = (value >> 16) & 0xff;
+    gli_link_color[1] = (value >> 8)  & 0xff;
+    gli_link_color[2] = (value)       & 0xff;
+}
+
+glui32 glk_get_config(glui32 param)
+{
+    return (gli_link_color[0] << 16) +
+           (gli_link_color[1] << 8) +
+           (gli_link_color[2]);
+}
+

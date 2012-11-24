@@ -488,4 +488,7 @@ extern void garglk_set_reversevideo_stream(strid_t str, glui32 reverse);
 #define keycode_MouseWheelUp        (0xffffeffe)
 #define keycode_MouseWheelDown      (0xffffefff)
 
+extern void glk_set_config(glui32 param, glui32 value); /* (c) Alpha */
+extern glui32 glk_get_config(glui32 param);             /* (c) Alpha */
+
 #endif /* GLK_H */
