@@ -319,8 +319,9 @@ static gidispatch_function_t function_table[] = {
     { 0xFFFE, glk_incr_fontsize, "incr_fontsize" },
     { 0xFFFD, glk_decr_fontsize, "decr_fontsize" },
     { 0xFFFC, glk_window_stylehint_set, "window_stylehint_set" },
-    { 0xFFFB, glk_set_config, "set_config" },
-    { 0xFFFA, glk_get_config, "get_config" }
+    { 0xFFFB, glk_window_stylehint_get, "window_stylehint_get" },
+    { 0xFFFA, glk_set_config, "set_config" },
+    { 0xFFF9, glk_get_config, "get_config" }
 };
 
 glui32 gidispatch_count_classes()
@@ -664,9 +665,11 @@ char *gidispatch_prototype(glui32 funcnum)
             return "0:";
         case 0xFFFC: /* window_stylehint_set */
             return "4QaIuIuIs:";
-        case 0xFFFB: /* set_config */
+        case 0xFFFB: /* window_stylehint_get */
+            return "4QaIuIu:Is";
+        case 0xFFFA: /* set_config */
             return "2IuIu:";
-        case 0xFFFA: /* get_config */
+        case 0xFFF9: /* get_config */
             return "2Iu:Iu";
 
         default:
@@ -1500,11 +1503,16 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
                                      arglist[2].uint, arglist[3].sint);
             break;
 
-        case 0xFFFB: /* set_config */
+        case 0xFFFB: /* window_stylehint_get */
+            arglist[4].sint = glk_window_stylehint_get(arglist[0].opaqueref, arglist[1].uint,
+                                                       arglist[2].uint);
+            break;
+
+        case 0xFFFA: /* set_config */
             glk_set_config(arglist[0].uint, arglist[1].uint);
             break;
 
-        case 0xFFFA: /* get_config */
+        case 0xFFF9: /* get_config */
             arglist[2].uint = glk_get_config(arglist[0].uint);
             break;
 

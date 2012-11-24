@@ -275,8 +275,12 @@ extern glsi32 glk_get_char_stream(strid_t str);
 extern glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len);
 extern glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len);
 
+/* (c) Alpha */
 extern void glk_window_stylehint_set(winid_t win, glui32 styl, glui32 hint,
-    glsi32 val); /* (c) Alpha */
+    glsi32 val);
+extern glsi32 glk_window_stylehint_get(winid_t win, glui32 styl, glui32 hint);
+/*************/
+
 extern void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint,
     glsi32 val);
 extern void glk_stylehint_clear(glui32 wintype, glui32 styl, glui32 hint);

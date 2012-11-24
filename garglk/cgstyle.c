@@ -212,6 +212,62 @@ void glk_window_stylehint_set(winid_t win, glui32 style, glui32 hint, glsi32 val
 
 }
 
+glsi32 glk_window_stylehint_get(winid_t win, glui32 style, glui32 hint)
+{
+    style_t *styles;
+    int p, b, i;
+
+    if (win->type == wintype_TextGrid)
+        styles = ((window_textgrid_t*)win->data)->styles;
+    else if (win->type == wintype_TextBuffer)
+        styles = ((window_textbuffer_t*)win->data)->styles;
+    else
+        return 0;
+
+    switch (hint)
+    {
+        case stylehint_TextColor:
+            return ((styles[style].fg[0]) << 16) +
+                    ((styles[style].fg[1]) << 8) +
+                    styles[style].fg[2];
+
+        case stylehint_BackColor:
+            return ((styles[style].bg[0]) << 16) +
+                    ((styles[style].bg[1]) << 8) +
+                    styles[style].bg[2];
+
+        case stylehint_ReverseColor:
+            return styles[style].reverse;
+
+/*
+        case stylehint_Proportional:
+            if (win->type == wintype_TextBuffer)
+            {
+                p = val > 0;
+                b = isbold(styles[style].font);
+                i = isitalic(styles[style].font);
+                styles[style].font = makefont(p, b, i);
+            }
+            break;
+
+        case stylehint_Weight:
+            p = isprop(styles[style].font);
+            b = val > 0;
+            i = isitalic(styles[style].font);
+            styles[style].font = makefont(p, b, i);
+            break;
+
+        case stylehint_Oblique:
+            p = isprop(styles[style].font);
+            b = isbold(styles[style].font);
+            i = val > 0;
+            styles[style].font = makefont(p, b, i);
+            break;
+*/
+    }
+    return 0;
+}
+
 void glk_stylehint_clear(glui32 wintype, glui32 style, glui32 hint)
 {
     style_t *styles;
