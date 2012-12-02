@@ -633,6 +633,10 @@ void glk_set_config(glui32 param, glui32 value)
         case config_WBorderY:
             gli_wbordery = value;
             break;
+
+        case config_LinkStyle:
+            gli_link_style = (value != 0) ? 1 : 0;
+            break;
     }
 }
 
@@ -654,6 +658,9 @@ glui32 glk_get_config(glui32 param)
 
         case config_WBorderY:
             return gli_wbordery;
+
+        case config_LinkStyle:
+            return gli_link_style;
 
         default:
             return 0;
