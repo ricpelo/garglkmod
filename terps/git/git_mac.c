@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <math.h>
 
 static strid_t mac_gamefile;
 
@@ -77,3 +78,15 @@ void fatalError (const char * s)
     fprintf (stderr, "*** fatal error: %s ***\n", s);
     exit (1);
 }
+
+float git_powf(float x, float y)
+{
+  if (x == 1.0f)
+    return 1.0f;
+  else if ((y == 0.0f) || (y == -0.0f))
+    return 1.0f;
+  else if ((x == -1.0f) && isinf(y))
+    return 1.0f;
+  return powf(x,y);
+}
+

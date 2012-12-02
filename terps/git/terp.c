@@ -51,16 +51,7 @@ int floatCompare(git_sint32 L1, git_sint32 L2, git_sint32 L3)
 }
 
 #ifdef USE_OWN_POWF
-float git_powf(float x, float y)
-{
-  if (x == 1.0f)
-    return 1.0f;
-  else if ((y == 0.0f) || (y == -0.0f))
-    return 1.0f;
-  else if ((x == -1.0f) && isinf(y))
-    return 1.0f;
-  return powf(x,y);
-}
+float git_powf(float x, float y);
 #endif
 
 // -------------------------------------------------------------
