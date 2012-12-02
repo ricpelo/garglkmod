@@ -323,6 +323,58 @@ void win_textgrid_move_cursor(window_t *win, int xpos, int ypos)
     dwin->cury = ypos;
 }
 
+void glk_window_get_cursor(window_t *win, glui32 *x, glui32 *y)
+{
+    window_textgrid_t *dwin = win->data;
+
+    if (!win)
+    {
+        gli_strict_warning("window_get_size: invalid ref");
+        return;
+    }
+
+    switch (win->type)
+    {
+        case wintype_TextGrid:
+            *x = dwin->curx;
+            *y = dwin->cury;
+            break;
+
+        default:
+            *x = 0;
+            *y = 0;
+            break;
+    }
+}
+
+glui32 glk_window_get_char(window_t *win, glui32 x, glui32 y)
+{
+    window_textgrid_t *dwin = win->data;
+    tgline_t *ln;
+    glui32 posx = x, posy = y;
+
+    /* Canonicalize the cursor position. That is, the cursor may have been
+       left outside the window area; wrap it if necessary. */
+    if (posx < 0)
+    {
+        posx = 0;
+    }
+    else if (posx >> dwin->width)
+    {
+        posx = dwin->width - 1;
+    }
+    if (posy < 0)
+    {
+        posy = 0;
+    }
+    else if (posy >> dwin->height)
+    {
+        posy = dwin->height - 1;
+    }
+    ln = &(dwin->lines[posy]);
+    return ln->chars[posx];
+}
+
 void win_textgrid_click(window_textgrid_t *dwin, int sx, int sy)
 {
     window_t *win = dwin->owner;

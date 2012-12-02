@@ -243,6 +243,11 @@ extern winid_t glk_window_get_sibling(winid_t win);
 extern void glk_window_clear(winid_t win);
 extern void glk_window_move_cursor(winid_t win, glui32 xpos, glui32 ypos);
 
+/* (c) Alpha */
+extern void glk_window_get_cursor(winid_t win, glui32 *x, glui32 *y);
+extern glui32 glk_window_get_char(winid_t win, glui32 x, glui32 y);
+/*************/
+
 extern strid_t glk_window_get_stream(winid_t win);
 extern void glk_window_set_echo_stream(winid_t win, strid_t str);
 extern strid_t glk_window_get_echo_stream(winid_t win);
@@ -262,8 +267,12 @@ extern strid_t glk_stream_get_current(void);
 
 extern void glk_put_char(unsigned char ch);
 extern void glk_put_char_stream(strid_t str, unsigned char ch);
-extern void glk_incr_fontsize(void); /* (c) Alpha */
-extern void glk_decr_fontsize(void); /* (c) Alpha */
+
+/* (c) Alpha */
+extern void glk_incr_fontsize(void);
+extern void glk_decr_fontsize(void);
+/*************/
+
 extern void glk_put_string(char *s);
 extern void glk_put_string_stream(strid_t str, char *s);
 extern void glk_put_buffer(char *buf, glui32 len);
@@ -493,12 +502,10 @@ extern void garglk_set_reversevideo_stream(strid_t str, glui32 reverse);
 #define keycode_MouseWheelDown      (0xffffefff)
 
 /* (c) Alpha */
-
 #define config_LinkColor (0)
 #define config_BorderColor (1)
 #define config_WBorderX (2)
 #define config_WBorderY (3)
-
 /*************/
 
 extern void glk_set_config(glui32 param, glui32 value); /* (c) Alpha */
