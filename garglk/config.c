@@ -637,6 +637,26 @@ void glk_set_config(glui32 param, glui32 value)
         case config_LinkStyle:
             gli_link_style = (value != 0) ? 1 : 0;
             break;
+
+        case config_MonoSize:
+            gli_conf_monosize = (float) (value / 10.0);
+            gli_reinitialize_fonts();
+            break;
+
+        case config_PropSize:
+            gli_conf_propsize = (float) (value / 10.0);
+            gli_reinitialize_fonts();
+            break;
+
+        case config_Baseline:
+            gli_baseline = value;
+            gli_reinitialize_fonts();
+            break;
+
+        case config_Leading:
+            gli_leading = value;
+            gli_reinitialize_fonts();
+            break;
     }
 }
 
@@ -661,6 +681,18 @@ glui32 glk_get_config(glui32 param)
 
         case config_LinkStyle:
             return gli_link_style;
+
+        case config_MonoSize:
+            return (int) (gli_conf_monosize * 10.0);
+
+        case config_PropSize:
+            return (int) (gli_conf_propsize * 10.0);
+
+        case config_Baseline:
+            return gli_baseline;
+
+        case config_Leading:
+            return gli_leading;
 
         default:
             return 0;
