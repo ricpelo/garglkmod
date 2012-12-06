@@ -1886,7 +1886,7 @@ void glk_incr_fontsize(void)
     gli_conf_propsize++;
     gli_leading++;
     gli_baseline++;
-    gli_initialize_fonts();
+    gli_reinitialize_fonts();
 }
 
 void glk_decr_fontsize(void)
@@ -1895,7 +1895,7 @@ void glk_decr_fontsize(void)
     gli_conf_propsize--;
     gli_leading--;
     gli_baseline--;
-    gli_initialize_fonts();
+    gli_reinitialize_fonts();
 }
 
 void glk_put_string(char *s)

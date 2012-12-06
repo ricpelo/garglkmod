@@ -420,6 +420,46 @@ void gli_initialize_fonts(void)
     gli_cellw = (gfont_table[0].lowadvs['0'] + GLI_SUBPIX - 1) / GLI_SUBPIX;
 }
 
+void gli_reinitialize_fonts(void)
+{
+    float monoaspect = gli_conf_monoaspect;
+    float propaspect = gli_conf_propaspect;
+    float monosize = gli_conf_monosize;
+    float propsize = gli_conf_propsize;
+    int err;
+    int i;
+
+    for (i = 0; i < 256; i++)
+        gammamap[i] = pow(i / 255.0, gli_conf_gamma) * 255.0;
+
+    /* replace built-in fonts with configured system font */
+//    fontload();
+//    fontreplace(gli_conf_monofont, MONOF);
+//    fontreplace(gli_conf_propfont, PROPF);
+//    fontunload();
+
+    /* create oblique transform matrix */
+    ftmat.xx = 0x10000L;
+    ftmat.yx = 0x00000L;
+    ftmat.xy = 0x03000L;
+    ftmat.yy = 0x10000L;
+
+    loadfont(&gfont_table[0], gli_conf_monor, monosize, monoaspect, FONTR);
+    loadfont(&gfont_table[1], gli_conf_monob, monosize, monoaspect, FONTB);
+    loadfont(&gfont_table[2], gli_conf_monoi, monosize, monoaspect, FONTI);
+    loadfont(&gfont_table[3], gli_conf_monoz, monosize, monoaspect, FONTZ);
+
+    loadfont(&gfont_table[4], gli_conf_propr, propsize, propaspect, FONTR);
+    loadfont(&gfont_table[5], gli_conf_propb, propsize, propaspect, FONTB);
+    loadfont(&gfont_table[6], gli_conf_propi, propsize, propaspect, FONTI);
+    loadfont(&gfont_table[7], gli_conf_propz, propsize, propaspect, FONTZ);
+
+    loadglyph(&gfont_table[0], '0');
+
+    gli_cellh = gli_leading;
+    gli_cellw = (gfont_table[0].lowadvs['0'] + GLI_SUBPIX - 1) / GLI_SUBPIX;
+}
+
 /*
  * Drawing
  */
