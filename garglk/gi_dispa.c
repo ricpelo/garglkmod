@@ -323,7 +323,8 @@ static gidispatch_function_t function_table[] = {
     { 0xFFFA, glk_set_config, "set_config" },
     { 0xFFF9, glk_get_config, "get_config" },
     { 0xFFF8, glk_window_get_cursor, "window_get_cursor" },
-    { 0xFFF7, glk_window_get_char, "window_get_char" }
+    { 0xFFF7, glk_window_get_char, "window_get_char" },
+    { 0xFFF6, glk_window_noscroll, "window_noscroll" }
 };
 
 glui32 gidispatch_count_classes()
@@ -677,6 +678,8 @@ char *gidispatch_prototype(glui32 funcnum)
             return "3Qa<Iu<Iu:";
         case 0xFFF7: /* window_get_char */
             return "4QaIuIu:Iu";
+        case 0xFFF6: /* window_noscroll */
+            return "1Qa:";
 
         default:
             return NULL;
@@ -1549,6 +1552,10 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
         case 0xFFF7: /* window_get_char */
             arglist[4].uint = glk_window_get_char(arglist[0].opaqueref, arglist[1].uint,
                                                   arglist[2].uint);
+            break;
+
+        case 0xFFF6: /* window_noscroll */
+            glk_window_noscroll(arglist[0].opaqueref);
             break;
 
         default:

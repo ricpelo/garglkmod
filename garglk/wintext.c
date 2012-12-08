@@ -1157,6 +1157,14 @@ void win_textbuffer_clear(window_t *win)
 //            gli_window_color);
 }
 
+void glk_window_noscroll(window_t *win)
+{
+    window_textbuffer_t *dwin = win->data;
+
+    dwin->lastseen = 0;
+    dwin->scrollpos = 0;
+}
+
 /* Prepare the window for line input. */
 void win_textbuffer_init_line(window_t *win, char *buf, int maxlen, int initlen)
 {
