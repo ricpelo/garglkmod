@@ -506,11 +506,13 @@ extern void garglk_set_reversevideo_stream(strid_t str, glui32 reverse);
 #define config_BorderColor (1)
 #define config_WBorderX    (2)
 #define config_WBorderY    (3)
-#define config_LinkStyle   (4)
-#define config_MonoSize    (5)
-#define config_PropSize    (6)
-#define config_Baseline    (7)
-#define config_Leading     (8)
+#define config_WPaddingX   (4)
+#define config_WPaddingY   (5)
+#define config_LinkStyle   (6)
+#define config_MonoSize    (7)
+#define config_PropSize    (8)
+#define config_Baseline    (9)
+#define config_Leading     (10)
 /*************/
 
 extern void glk_set_config(glui32 param, glui32 value); /* (c) Alpha */

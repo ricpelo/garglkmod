@@ -634,6 +634,14 @@ void glk_set_config(glui32 param, glui32 value)
             gli_wbordery = value;
             break;
 
+        case config_WPaddingX:
+            gli_wpaddingx = value;
+            break;
+
+        case config_WPaddingY:
+            gli_wpaddingy = value;
+            break;
+
         case config_LinkStyle:
             gli_link_style = (value != 0) ? 1 : 0;
             break;
@@ -678,6 +686,12 @@ glui32 glk_get_config(glui32 param)
 
         case config_WBorderY:
             return gli_wbordery;
+
+        case config_WPaddingX:
+            return gli_wpaddingx;
+
+        case config_WPaddingY:
+            return gli_wpaddingy;
 
         case config_LinkStyle:
             return gli_link_style;
