@@ -73,6 +73,17 @@ static char *winfilters[] =
     "All files (*.*)\0*.*\0\0",
 };
 
+void glk_get_screen_size(glui32 *width, glui32 *height)
+{
+    int wid = GetSystemMetrics(SM_CXSCREEN);
+    int hgt = GetSystemMetrics(SM_CYSCREEN);
+
+    if (width)
+        *width = (glui32) wid;
+    if (height)
+        *height = (glui32) hgt;
+}
+
 void glk_request_timer_events(glui32 millisecs)
 {
 	if (timerid != -1)

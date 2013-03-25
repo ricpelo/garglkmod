@@ -271,6 +271,7 @@ extern void glk_put_char_stream(strid_t str, unsigned char ch);
 /* (c) Alpha */
 extern void glk_incr_fontsize(void);
 extern void glk_decr_fontsize(void);
+extern void glk_get_screen_size(glui32 *width, glui32 *height);
 /*************/
 
 extern void glk_put_string(char *s);

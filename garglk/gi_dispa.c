@@ -324,7 +324,8 @@ static gidispatch_function_t function_table[] = {
     { 0xFFF9, glk_get_config, "get_config" },
     { 0xFFF8, glk_window_get_cursor, "window_get_cursor" },
     { 0xFFF7, glk_window_get_char, "window_get_char" },
-    { 0xFFF6, glk_window_noscroll, "window_noscroll" }
+    { 0xFFF6, glk_window_noscroll, "window_noscroll" },
+    { 0xFFF5, glk_get_screen_size, "get_screen_size" }
 };
 
 glui32 gidispatch_count_classes()
@@ -680,6 +681,8 @@ char *gidispatch_prototype(glui32 funcnum)
             return "4QaIuIu:Iu";
         case 0xFFF6: /* window_noscroll */
             return "1Qa:";
+        case 0xFFF5: /* get_screen_size */
+            return "2<Iu<Iu:";
 
         default:
             return NULL;
@@ -1556,6 +1559,30 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
 
         case 0xFFF6: /* window_noscroll */
             glk_window_noscroll(arglist[0].opaqueref);
+            break;
+
+        case 0xFFF5: /* get_screen_size */
+            {
+                int ix = 0;
+                glui32 *ptr1, *ptr2;
+                if (!arglist[ix].ptrflag) {
+                    ptr1 = NULL;
+                }
+                else {
+                    ix++;
+                    ptr1 = &(arglist[ix].uint);
+                }
+                ix++;
+                if (!arglist[ix].ptrflag) {
+                    ptr2 = NULL;
+                }
+                else {
+                    ix++;
+                    ptr2 = &(arglist[ix].uint);
+                }
+                ix++;
+                glk_get_screen_size(ptr1, ptr2);
+            }
             break;
 
         default:

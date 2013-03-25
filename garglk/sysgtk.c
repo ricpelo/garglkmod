@@ -73,6 +73,20 @@ static int timeout(void *data)
     return TRUE;
 }
 
+void glk_get_screen_size(glui32 *width, glui32 *height)
+{
+    GdkScreen *screen = gdk_screen_get_default();
+    glui32 wid, hgt;
+
+    wid = gdk_screen_get_width(screen);
+    hgt = gdk_screen_get_height(screen);
+
+    if (width)
+        *width = wid;
+    if (height)
+        *height = hgt;
+}
+
 void glk_request_timer_events(glui32 millisecs)
 {
     if (timerid != -1)
