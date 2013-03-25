@@ -180,6 +180,23 @@ static pid_t processID = 0;
 static int gli_refresh_needed = TRUE;
 static int gli_window_hidden = FALSE;
 
+void glk_get_screen_size(glui32 *width, glui32 *height)
+{
+    NSRect screenRect;
+    NSArray *screenArray = [NSScreen screens];
+    unsigned screenCount = [screenArray count];
+
+    for (unsigned index = 0; index < screenCount; index++) {
+        NSScreen *screen = [screenArray objectAtIndex: index];
+        screenRect = [screen visibleFrame];
+    }
+
+    if (width)
+        *width = (glui32) (screenRect.size.width);
+    if (height)
+        *height = (glui32) (screenRect.size.height);
+}
+
 void glk_request_timer_events(glui32 millisecs)
 {
     [monitor track: ((double) millisecs) / 1000];
