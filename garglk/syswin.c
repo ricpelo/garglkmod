@@ -375,8 +375,13 @@ void winopen()
     wintitle();
 
     ShowWindow(hwndframe, SW_SHOW);
-    SetWindowLong(hwndframe, GWL_STYLE, GetWindowLong(hwndframe, GWL_STYLE) & ~(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME));
-    SetWindowLong(hwndframe, GWL_EXSTYLE, GetWindowLong(hwndframe, GWL_EXSTYLE) & ~WS_EX_DLGMODALFRAME);
+    SetWindowLong(hwndframe, GWL_STYLE,
+                  GetWindowLong(hwndframe, GWL_STYLE) & ~(WS_CAPTION | WS_THICKFRAME));
+    SetWindowLong(hwndframe, GWL_EXSTYLE,
+                  GetWindowLong(hwndframe, GWL_EXSTYLE) & ~(WS_EX_DLGMODALFRAME |
+                  WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+    SetWindowPos(hwndframe, NULL, 0, 0, sizew, sizeh,
+                 SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
 }
 
 void wintitle(void)
