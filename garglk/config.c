@@ -665,6 +665,10 @@ void glk_set_config(glui32 param, glui32 value)
             gli_leading = value;
             gli_reinitialize_fonts();
             break;
+
+        case config_Cols:
+            gli_cols = value;
+            break;
     }
 }
 
@@ -707,6 +711,9 @@ glui32 glk_get_config(glui32 param)
 
         case config_Leading:
             return gli_leading;
+
+        case config_Cols:
+            return gli_cols;
 
         default:
             return 0;

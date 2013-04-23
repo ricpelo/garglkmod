@@ -515,6 +515,7 @@ extern void garglk_set_reversevideo_stream(strid_t str, glui32 reverse);
 #define config_PropSize    (8)
 #define config_Baseline    (9)
 #define config_Leading     (10)
+#define config_Cols        (11)
 /*************/
 
 extern void glk_set_config(glui32 param, glui32 value); /* (c) Alpha */
