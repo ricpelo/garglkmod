@@ -1163,6 +1163,7 @@ void glk_window_noscroll(window_t *win)
 
     dwin->lastseen = 0;
     dwin->scrollpos = 0;
+    dwin->scrollmax = 0;
 }
 
 /* Prepare the window for line input. */
