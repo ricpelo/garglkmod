@@ -52,6 +52,8 @@ static char *cliptext = NULL;
 static int cliplen = 0;
 enum clipsource { PRIMARY , CLIPBOARD };
 
+static int pulsado_release = TRUE;
+
 /* filters for file dialogs */
 static char *winfilternames[] =
 {
@@ -366,9 +368,10 @@ static void onexpose(GtkWidget *widget, GdkEventExpose *event, void *data)
 
 static void onbuttondown(GtkWidget *widget, GdkEventButton *event, void *data)
 {
-    if (event->button == 1)
+    if (event->button == 1 && pulsado_release == TRUE) {
+        pulsado_release = FALSE;
         gli_input_handle_click(event->x, event->y);
-    else if (event->button == 2)
+    } else if (event->button == 2)
         winclipreceive(PRIMARY);
 }
 
@@ -376,6 +379,7 @@ static void onbuttonup(GtkWidget *widget, GdkEventButton *event, void *data)
 {
     if (event->button == 1)
     {
+        pulsado_release = TRUE;
         gli_copyselect = FALSE;
         gdk_window_set_cursor((GTK_WIDGET(widget)->window), NULL);
         winclipsend(PRIMARY);
