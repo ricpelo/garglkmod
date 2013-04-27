@@ -42,6 +42,8 @@ put_text_uni(window_textbuffer_t *dwin, glui32 *buf, int len, int pos, int oldle
 static glui32
 put_picture(window_textbuffer_t *dwin, picture_t *pic, glui32 align, glui32 linkval);
 
+static hacer_reflow = FALSE;
+
 static void touch(window_textbuffer_t *dwin, int line)
 {
     window_t *win = dwin->owner;
@@ -285,7 +287,8 @@ void win_textbuffer_rearrange(window_t *win, rect_t *box)
     if (newwid != dwin->width)
     {
         dwin->width = newwid;
-        /* reflow(win); */
+        if (hacer_reflow == TRUE)
+            reflow(win);
     }
 
     if (newhgt != dwin->height)
@@ -1164,6 +1167,16 @@ void glk_window_noscroll(window_t *win)
     dwin->lastseen = 0;
     dwin->scrollpos = 0;
     dwin->scrollmax = 0;
+}
+
+void glk_set_reflow(glui32 val)
+{
+    hacer_reflow = (val != 0) ? TRUE : FALSE;
+}
+
+glui32 glk_get_reflow(void)
+{
+    return (glui32) hacer_reflow;
 }
 
 /* Prepare the window for line input. */
