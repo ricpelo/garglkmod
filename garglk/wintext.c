@@ -1701,9 +1701,6 @@ void gcmd_buffer_accept_readline(window_t *win, glui32 arg)
                        break;
                 }
 
-                if (i < 0) i = 0;
-                else i++;
-
                 // Step forward to extract last word
                 glui32 word[dwin->incurs - i];
 
