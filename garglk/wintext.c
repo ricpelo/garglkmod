@@ -1166,7 +1166,6 @@ void glk_window_noscroll(window_t *win)
 
     dwin->lastseen = 0;
     dwin->scrollpos = 0;
-    dwin->scrollmax = 0;
 }
 
 void glk_set_reflow(glui32 val)
