@@ -334,19 +334,16 @@ void winopen()
     int sizew = gli_wmarginx * 2 + gli_cellw * gli_cols;
     int sizeh = gli_wmarginy * 2 + gli_cellh * gli_rows;
 
-    sizew += GetSystemMetrics(SM_CXFRAME) * 2;
-    sizeh += GetSystemMetrics(SM_CYFRAME) * 2;
-    sizeh += GetSystemMetrics(SM_CYCAPTION);
+//    sizew += GetSystemMetrics(SM_CXFRAME) * 2;
+//    sizeh += GetSystemMetrics(SM_CYFRAME) * 2;
+//    sizeh += GetSystemMetrics(SM_CYCAPTION);
 
     sizew = GetSystemMetrics(SM_CXSCREEN);
     sizeh = GetSystemMetrics(SM_CYSCREEN);
 
-    hwndframe = CreateWindowEx(WS_EX_TOPMOST, "XxFrame",
+    hwndframe = CreateWindowEx(0, "XxFrame",
         NULL, // window caption
         WS_CLIPCHILDREN|WS_MAXIMIZE,
-//        WS_CAPTION|WS_THICKFRAME|
-//        WS_SYSMENU|WS_MAXIMIZEBOX|WS_MINIMIZEBOX|
-//        WS_CLIPCHILDREN,
         CW_USEDEFAULT, // initial x position
         CW_USEDEFAULT, // initial y position
         sizew, // initial x size
@@ -372,14 +369,14 @@ void winopen()
     //AppendMenu(menu, MF_STRING, ID_CONFIG, "Options...");
     //AppendMenu(menu, MF_STRING, ID_TOGSCR, "Toggle scrollbar");
 
-    wintitle();
+//    wintitle();
 
     ShowWindow(hwndframe, SW_SHOW);
     SetWindowLong(hwndframe, GWL_STYLE,
                   GetWindowLong(hwndframe, GWL_STYLE) & ~(WS_CAPTION | WS_THICKFRAME));
-    SetWindowLong(hwndframe, GWL_EXSTYLE,
-                  GetWindowLong(hwndframe, GWL_EXSTYLE) & ~(WS_EX_DLGMODALFRAME |
-                  WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+//    SetWindowLong(hwndframe, GWL_EXSTYLE,
+//                  GetWindowLong(hwndframe, GWL_EXSTYLE) & ~(WS_EX_DLGMODALFRAME |
+//                  WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
     SetWindowPos(hwndframe, NULL, 0, 0, sizew, sizeh,
                  SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
 }
