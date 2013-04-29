@@ -359,7 +359,7 @@ glui32 glk_window_get_char(window_t *win, glui32 x, glui32 y)
     {
         posx = 0;
     }
-    else if (posx >> dwin->width)
+    else if (posx > dwin->width)
     {
         posx = dwin->width - 1;
     }
@@ -367,7 +367,7 @@ glui32 glk_window_get_char(window_t *win, glui32 x, glui32 y)
     {
         posy = 0;
     }
-    else if (posy >> dwin->height)
+    else if (posy > dwin->height)
     {
         posy = dwin->height - 1;
     }
