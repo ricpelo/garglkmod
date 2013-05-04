@@ -77,16 +77,23 @@ static int timeout(void *data)
 
 void glk_mplayer(char *video)
 {
-    char cwd[MaxBuffer];
-    char cmd[MaxBuffer];
+    char *argumentos[] = { "mplayer", "-vo", "sdl", "-fs", video, NULL };
+    int pid, status;
 
-    strcpy(cmd, "/usr/bin/mplayer -vo sdl -fs ");
-    getcwd(cwd, sizeof cwd);
-    strcat(cmd, cwd);
-    strcat(cmd, "/");
-    strcat(cmd, video);
-    strcat(cmd, " > /dev/null 2>&1");
-    system(cmd);
+    pid = fork();
+
+    switch (pid) {
+        case -1:
+            return;
+
+        case 0:
+            execvp(argumentos[0], argumentos);
+            return;
+
+        default:
+            while (wait(&status) != pid);
+            return;
+    }
 }
 
 void glk_get_screen_size(glui32 *width, glui32 *height)
