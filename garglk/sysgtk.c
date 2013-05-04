@@ -75,6 +75,15 @@ static int timeout(void *data)
     return TRUE;
 }
 
+void glk_mplayer(char *video)
+{
+    char cmd[MaxBuffer];
+
+    strcpy(cmd, "/usr/bin/mplayer -vo sdl -fs ");
+    strcat(cmd, video);
+    system(cmd);
+}
+
 void glk_get_screen_size(glui32 *width, glui32 *height)
 {
     GdkScreen *screen = gdk_screen_get_default();

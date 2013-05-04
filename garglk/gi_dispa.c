@@ -327,7 +327,8 @@ static gidispatch_function_t function_table[] = {
     { 0xFFF6, glk_window_noscroll, "window_noscroll" },
     { 0xFFF5, glk_get_screen_size, "get_screen_size" },
     { 0xFFF4, glk_set_reflow, "set_reflow" },
-    { 0xFFF4, glk_get_reflow, "get_reflow" }
+    { 0xFFF3, glk_get_reflow, "get_reflow" },
+    { 0xFFF2, glk_mplayer, "mplayer" }
 };
 
 glui32 gidispatch_count_classes()
@@ -689,6 +690,8 @@ char *gidispatch_prototype(glui32 funcnum)
             return "1Iu:";
         case 0xFFF3: /* get_reflow */
             return "1:Iu";
+        case 0xFFF2: /* mplayer */
+            return "1S:";
 
         default:
             return NULL;
@@ -1597,6 +1600,10 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
 
         case 0xFFF3: /* get_reflow */
             arglist[1].uint = glk_get_reflow();
+            break;
+
+        case 0xFFF2: /* mplayer */
+            glk_mplayer(arglist[0].charstr);
             break;
 
         default:

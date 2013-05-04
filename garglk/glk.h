@@ -292,6 +292,7 @@ extern glsi32 glk_window_stylehint_get(winid_t win, glui32 styl, glui32 hint);
 extern void glk_window_noscroll(winid_t win);
 extern void glk_set_reflow(glui32 val);
 extern glui32 glk_get_reflow(void);
+extern void glk_mplayer(char *video);
 /*************/
 
 extern void glk_stylehint_set(glui32 wintype, glui32 styl, glui32 hint,
