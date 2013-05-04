@@ -77,9 +77,13 @@ static int timeout(void *data)
 
 void glk_mplayer(char *video)
 {
+    char cwd[MaxBuffer];
     char cmd[MaxBuffer];
 
     strcpy(cmd, "/usr/bin/mplayer -vo sdl -fs ");
+    getcwd(cwd, sizeof cwd);
+    strcat(cmd, cwd);
+    strcat(cmd, "/");
     strcat(cmd, video);
     system(cmd);
 }
