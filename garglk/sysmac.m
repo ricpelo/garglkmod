@@ -187,16 +187,32 @@ void glk_mplayer(char *video)
     char cwd[MaxBuffer];
     char cmd[MaxBuffer];
     char *s;
+    int pid, status;
 
     s = getcwd(cwd, sizeof cwd);
     if (!s) return;
 
+    // Los vídeos y el ejecutable de mplayer2 (y el lib/)
+    // van en Resources/
     strcpy(cmd, cwd);
-    strcat(cmd, "/../MacOS/mplayer2 -fs ");
-    strcat(cmd, cwd);
+    strcat(cwd, "/mplayer2");
     strcat(cmd, "/");
-    strcat(cmd, video); // Los vídeos van en Resources/
-    system(cmd);
+    strcat(cmd, video);
+
+    pid = fork();
+
+    switch (pid) {
+        case -1:
+            return;
+
+        case 0:
+            execlp(cwd, cwd, "-fs", cmd, NULL);
+            return;
+
+        default:
+            while (wait(&status) != pid);
+            return;
+    }
 }
 
 void glk_get_screen_size(glui32 *width, glui32 *height)

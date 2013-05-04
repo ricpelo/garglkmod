@@ -4,9 +4,9 @@
 - El Mplayer para Mac OS X está en https://code.google.com/p/mplayerosx-builds/
 
 - Entramos en mplayer2.app/Contents/MacOS/, y de ahí cogemos el archivo mplayer2
-  y el directorio /lib, y los copiamos en Gargoyle.app/Contents/MacOS/
+  y el directorio /lib, y los copiamos en Gargoyle.app/Contents/Resources/
 
-- Copiamos los vídeos en Gargoyle.app/Contents/Resources/
+- Copiamos los vídeos también en Gargoyle.app/Contents/Resources/
 
 
 * Windows:
