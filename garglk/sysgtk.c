@@ -85,6 +85,7 @@ void glk_mplayer(char *video)
     strcat(cmd, cwd);
     strcat(cmd, "/");
     strcat(cmd, video);
+    strcat(cmd, " > /dev/null 2>&1");
     system(cmd);
 }
 
