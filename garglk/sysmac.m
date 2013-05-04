@@ -180,6 +180,25 @@ static pid_t processID = 0;
 static int gli_refresh_needed = TRUE;
 static int gli_window_hidden = FALSE;
 
+#define MaxBuffer 1024
+
+void glk_mplayer(char *video)
+{
+    char cwd[MaxBuffer];
+    char cmd[MaxBuffer];
+    char *s;
+
+    s = getcwd(cwd, sizeof cwd);
+    if (!s) return;
+
+    strcpy(cmd, cwd);
+    strcat(cmd, "/../MacOS/mplayer2 -fs ");
+    strcat(cmd, cwd);
+    strcat(cmd, "/");
+    strcat(cmd, video); // Los vídeos van en Resources/
+    system(cmd);
+}
+
 void glk_get_screen_size(glui32 *width, glui32 *height)
 {
     if (width)
