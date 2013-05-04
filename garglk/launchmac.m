@@ -522,6 +522,7 @@ char *winfilters[] =
     [window setReleasedWhenClosed: YES];
     [window setDelegate: self];
     [windows setObject: window forKey: [NSString stringWithFormat: @"%04x", processID]];
+    [NSApp activateIgnoringOtherApps: YES];
 
     return ([window isVisible]);
 }
