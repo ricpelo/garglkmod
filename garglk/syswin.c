@@ -77,12 +77,30 @@ static char *winfilters[] =
 
 void glk_mplayer(char *video)
 {
+    char *argumentos = "mplayer.exe -vo direct3d -fs ";
     char cmd[MaxBuffer];
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
 
-    strcpy(cmd, "mplayer.exe -fs -vo direct3d ");
+    memset(&pi, 0, sizeof pi);
+    memset(&si, 0, sizeof si);
+
+    strcpy(cmd, argumentos);
     strcat(cmd, video);
-    strcat(cmd, " > nul 2>&1");
-    system(cmd);
+
+    CreateProcess(NULL,
+                  cmd,
+                  NULL,
+                  NULL,
+                  FALSE,
+                  CREATE_NO_WINDOW,
+                  NULL,
+                  NULL,
+                  &si,
+                  &pi
+    );
+
+    WaitForSingleObject( pi.hProcess, INFINITE );
 }
 
 void glk_get_screen_size(glui32 *width, glui32 *height)
