@@ -1,0 +1,28 @@
+* Mac OS X:
+===========
+
+- El Mplayer para Mac OS X está en https://code.google.com/p/mplayerosx-builds/
+
+- Entramos en mplayer2.app/Contents/MacOS/, y de ahí cogemos el archivo mplayer2
+  y el directorio /lib, y los copiamos en Gargoyle.app/Contents/MacOS/
+
+- Copiamos los vídeos en Gargoyle.app/Contents/Resources/
+
+
+* Windows:
+==========
+
+- El Mplayer para Windows está en https://code.google.com/p/mplayer-for-windows/
+
+- Copiamos el mplayer.exe en el mismo directorio donde esté el .blb
+
+- Copiamos los vídeos en el mismo directorio donde esté el .blb
+
+
+* Linux:
+
+- Instalamos el paquete de mplayer (hay que poner mplayer como dependencia de
+  nuestra aventura)
+
+- Copiamos los vídeos en el mismo directorio donde esté el .blb
+
