@@ -73,6 +73,18 @@ static char *winfilters[] =
     "All files (*.*)\0*.*\0\0",
 };
 
+#define MaxBuffer 1024
+
+void glk_mplayer(char *video)
+{
+    char cmd[MaxBuffer];
+
+    strcpy(cmd, "mplayer.exe -fs -vo direct3d ");
+    strcat(cmd, video);
+    strcat(cmd, " > nul 2>&1");
+    system(cmd);
+}
+
 void glk_get_screen_size(glui32 *width, glui32 *height)
 {
     int wid = GetSystemMetrics(SM_CXSCREEN);
