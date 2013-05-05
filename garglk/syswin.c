@@ -77,7 +77,7 @@ static char *winfilters[] =
 
 void glk_mplayer(char *video)
 {
-    char *argumentos = "mplayer.exe -vo direct3d -fs ";
+    char *argumentos = "mplayer.exe -vo direct3d -fs -nofontconfig ";
     char cmd[MaxBuffer];
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
