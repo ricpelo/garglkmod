@@ -206,7 +206,7 @@ void glk_mplayer(char *video)
             return;
 
         case 0:
-            execlp(cwd, cwd, "-fs", cmd, NULL);
+            execlp(cwd, cwd, "-fs", "-nofontconfig", cmd, NULL);
             return;
 
         default:
