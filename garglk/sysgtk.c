@@ -77,7 +77,7 @@ static int timeout(void *data)
 
 void glk_mplayer(char *video)
 {
-    char *argumentos[] = { "mplayer", "-vo", "sdl", "-fs", video, NULL };
+    char *argumentos[] = { "mplayer", "-vo", "sdl", "-fs", "-nofontconfig", video, NULL };
     int pid, status;
 
     pid = fork();
