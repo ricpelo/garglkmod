@@ -100,7 +100,9 @@ void glk_mplayer(char *video)
                   &pi
     );
 
-    WaitForSingleObject( pi.hProcess, INFINITE );
+    WaitForSingleObject(pi.hProcess, INFINITE);
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
 }
 
 void glk_get_screen_size(glui32 *width, glui32 *height)
