@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # INSTRUCCIONES:
 # 1. Renombramos Gargoyle a Gargoyle.exe en Gargoyle.app/Contents/MacOS/
