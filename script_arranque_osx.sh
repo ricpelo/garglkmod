@@ -13,4 +13,5 @@
 GARGOYLEROOT=$(cd "${0%/*}" && echo $PWD)
 cd "$GARGOYLEROOT"
 "$GARGOYLEROOT/Gargoyle.exe" "$GARGOYLEROOT/../Resources/elcirculo.blb"
+kill -9 `ps ax | grep Gargoyle.app | grep git | cut -d" " -f1` > /dev/null 2>&1
 
