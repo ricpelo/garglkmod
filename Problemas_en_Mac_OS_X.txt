@@ -1,0 +1,21 @@
+- La gestión de eventos en Mac OS X es bastante mala.
+- Además, pintar un gráfico en pantalla le cuesta mucho.
+- Por todo ello, el efecto de desplazar un gráfico por la pantalla hace que
+  el intérprete se quede cogido mientras lo desplaza: no responde a eventos
+  de teclado ni a hipervínculos.
+- He hecho un par de retoques pequeños que hacen que el efecto no sea tan
+  exagerado. Aún así, sigue dando problemas. A veces pulsas una tecla y no se
+  ve hasta que pulsas otra (y entonces se ven las dos a la vez).
+- Haciendo experimentos, he deducido que el valor mínimo de tick para poder
+  estar _más o menos_ seguro de que no habrá problemas es 500 ms.
+- Con hasta 250 ms _normalmente_ tampoco da problemas, pero de vez en cuando
+  se queda alguna tecla trabada y hay que pulsar otra para que se vean las dos.
+- Con 100 ms el problema se da con más frecuencia.
+- Por debajo de 100 ms el problema se aprecia prácticamente seguro durante la
+  partida.
+
+- [ACTUALIZACIÓN: Al final creo que lo he podido arreglar bastante bien
+  olvidándome de la variable gli_mach_allowed y poniendo de nuevo a FALSE la
+  variable gli_event_waiting justo antes de mandarle el evento al objeto
+  gargoyle.]
+

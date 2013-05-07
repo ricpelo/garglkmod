@@ -433,7 +433,7 @@ void winmach(CFMachPortRef port, void *msg, CFIndex size, void *info)
 
 void winhandler(int signal)
 {
-    if (signal == SIGUSR1 && gli_mach_allowed)
+    if (signal == SIGUSR1) //  && gli_mach_allowed)
     {
         mach_msg_header_t header;
         header.msgh_bits        = MACH_MSGH_BITS(MACH_MSG_TYPE_MAKE_SEND, 0);
@@ -766,8 +766,10 @@ void winloop(void)
     if (gli_refresh_needed)
         winrefresh();
 
-    if (gli_event_waiting)
+    if (gli_event_waiting) {
+        gli_event_waiting = FALSE;
         evt = [gargoyle getWindowEvent: processID];
+    }
 
     winevent(evt);
 }
@@ -782,8 +784,10 @@ void winpoll(void)
         if (gli_refresh_needed)
             winrefresh();
 
-        if (gli_event_waiting)
+        if (gli_event_waiting) {
+            gli_event_waiting = FALSE;
             evt = [gargoyle getWindowEvent: processID];
+        }
 
         winevent(evt);
     }
