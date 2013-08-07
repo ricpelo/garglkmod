@@ -43,6 +43,7 @@ static glui32
 put_picture(window_textbuffer_t *dwin, picture_t *pic, glui32 align, glui32 linkval);
 
 static hacer_reflow = FALSE;
+static glui32 menuhyperlink = 0;
 
 static void touch(window_textbuffer_t *dwin, int line)
 {
@@ -1694,6 +1695,8 @@ void gcmd_buffer_accept_readline(window_t *win, glui32 arg)
             break;
 
         case keycode_Escape:
+            if (menuhyperlink != 0)
+                gli_event_store(evtype_Hyperlink, win, menuhyperlink, 0);
             if (dwin->infence >= dwin->numchars)
                 return;
             put_text_uni(dwin, NULL, 0, dwin->infence, dwin->numchars - dwin->infence);
@@ -1920,3 +1923,9 @@ void win_textbuffer_click(window_textbuffer_t *dwin, int sx, int sy)
         gli_start_selection(sx, sy);
     }
 }
+
+void glk_menu_hyperlink_setup(glui32 link)
+{
+    menuhyperlink = link;
+}
+
